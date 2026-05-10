@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>AC2 - Projetos + PetCare</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="topo">
+    <div>
+        <p class="tag">Spring Boot + JPA + REST</p>
+        <h1>AC2 - Sistema de Projetos + PetCare</h1>
+        <p class="descricao">
+            Frontend simples para demonstrar o funcionamento do backend em sala.
+        </p>
+    </div>
+
+    <div class="status-card">
+        <span class="bolinha"></span>
+        <strong>API Local</strong>
+        <small>http://localhost:8080/api</small>
+    </div>
+</header>
+
+<main class="container">
+
+    <section class="card full">
+        <h2>Resumo da Demonstração</h2>
+
+        <div class="grid-resumo">
+            <div class="mini-card">
+                <strong id="totalProjetos">0</strong>
+                <span>Projetos</span>
+            </div>
+
+            <div class="mini-card">
+                <strong id="totalTutores">0</strong>
+                <span>Tutores</span>
+            </div>
+
+            <div class="mini-card">
+                <strong id="totalAnimais">0</strong>
+                <span>Animais</span>
+            </div>
+
+            <div class="mini-card">
+                <strong id="totalVeterinarios">0</strong>
+                <span>Veterinários</span>
+            </div>
+
+            <div class="mini-card destaque">
+                <strong id="totalConsultas">0</strong>
+                <span>Consultas</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="card">
+        <h2>Cadastrar Setor</h2>
+
+        <form id="formSetor" class="form">
+            <label>
+                Nome do setor
+                <input id="setorNome" required minlength="2" placeholder="Tecnologia">
+            </label>
+
+            <button type="submit">Salvar Setor</button>
+        </form>
+    </section>
+
+    <section class="card">
+        <h2>Cadastrar Funcionário</h2>
+
+        <form id="formFuncionario" class="form">
+            <label>
+                Nome do funcionário
+                <input id="funcionarioNome" required minlength="3" placeholder="William Oliveira">
+            </label>
+
+            <label>
+                Setor
+                <select id="funcionarioSetor" required></select>
+            </label>
+
+            <button type="submit">Salvar Funcionário</button>
+        </form>
+    </section>
+
+    <section class="card">
+        <h2>Cadastrar Projeto</h2>
+
+        <form id="formProjeto" class="form">
+            <label>
+                Descrição
+                <input id="projetoDescricao" required minlength="3" placeholder="Sistema Interno de Gestão">
+            </label>
+
+            <label>
+                Data início
+                <input id="projetoDataInicio" type="date" required>
+            </label>
+
+            <label>
+                Data fim
+                <input id="projetoDataFim" type="date" required>
+            </label>
+
+            <button type="submit">Salvar Projeto</button>
+        </form>
+    </section>
+
+    <section class="card">
+        <h2>Vincular Funcionário ao Projeto</h2>
+
+        <form id="formVinculoProjeto" class="form">
+            <label>
+                Projeto
+                <select id="vinculoProjeto" required></select>
+            </label>
+
+            <label>
+                Funcionário
+                <select id="vinculoFuncionario" required></select>
+            </label>
+
+            <button type="submit">Vincular</button>
+        </form>
+    </section>
+
+    <section class="card full">
+        <div class="titulo-linha">
+            <h2>Projetos cadastrados</h2>
+            <button class="secundario" onclick="carregarTudo()">Atualizar</button>
+        </div>
+
+        <div id="listaProjetos" class="tabela-area"></div>
+    </section>
+
+    <!-- ===================== PETCARE ===================== -->
+
+    <section class="card">
+        <h2>Cadastrar Tutor</h2>
+
+        <form id="formTutor" class="form">
+            <label>
+                Nome
+                <input id="tutorNome" required minlength="3" placeholder="Carlos Tutor">
+            </label>
+
+            <label>
+                Email
+                <input id="tutorEmail" type="email" required placeholder="carlos@email.com">
+            </label>
+
+            <label>
+                Telefone
+                <input id="tutorTelefone" required placeholder="15999990000">
+            </label>
+
+            <button type="submit">Salvar Tutor</button>
+        </form>
+    </section>
+
+    <section class="card">
+        <h2>Cadastrar Animal</h2>
+
+        <form id="formAnimal" class="form">
+            <label>
+                Nome
+                <input id="animalNome" required minlength="2" placeholder="Rex">
+            </label>
+
+            <label>
+                Espécie
+                <input id="animalEspecie" required placeholder="Cachorro">
+            </label>
+
+            <label>
+                Raça
+                <input id="animalRaca" required placeholder="Golden Retriever">
+            </label>
+
+            <label>
+                Idade
+                <input id="animalIdade" type="number" min="0" max="50" required>
+            </label>
+
+            <label>
+                Porte
+                <select id="animalPorte" required>
+                    <option value="PEQUENO">Pequeno</option>
+                    <option value="MEDIO">Médio</option>
+                    <option value="GRANDE">Grande</option>
+                </select>
+            </label>
+
+            <label>
+                Tutor
+                <select id="animalTutor" required></select>
+            </label>
+
+            <button type="submit">Salvar Animal</button>
+        </form>
+    </section>
+
+    <section class="card">
+        <h2>Cadastrar Veterinário</h2>
+
+        <form id="formVeterinario" class="form">
+            <label>
+                Nome
+                <input id="veterinarioNome" required minlength="3" placeholder="Dra. Ana">
+            </label>
+
+            <label>
+                CRMV
+                <input id="veterinarioCrmv" required placeholder="CRMV-SP-12345">
+            </label>
+
+            <label>
+                Especialidade
+                <select id="veterinarioEspecialidade" required>
+                    <option value="CLINICA_GERAL">Clínica Geral</option>
+                    <option value="DERMATOLOGIA">Dermatologia</option>
+                    <option value="CARDIOLOGIA">Cardiologia</option>
+                    <option value="ORTOPEDIA">Ortopedia</option>
+                    <option value="ODONTOLOGIA">Odontologia</option>
+                    <option value="VACINACAO">Vacinação</option>
+                </select>
+            </label>
+
+            <button type="submit">Salvar Veterinário</button>
+        </form>
+    </section>
+
+    <section class="card">
+        <h2>Agendar Consulta</h2>
+
+        <form id="formConsulta" class="form">
+            <label>
+                Data e hora
+                <input id="consultaDataHora" type="datetime-local" required>
+            </label>
+
+            <label>
+                Especialidade
+                <select id="consultaEspecialidade" required>
+                    <option value="CLINICA_GERAL">Clínica Geral</option>
+                    <option value="DERMATOLOGIA">Dermatologia</option>
+                    <option value="CARDIOLOGIA">Cardiologia</option>
+                    <option value="ORTOPEDIA">Ortopedia</option>
+                    <option value="ODONTOLOGIA">Odontologia</option>
+                    <option value="VACINACAO">Vacinação</option>
+                </select>
+            </label>
+
+            <label>
+                Animal
+                <select id="consultaAnimal" required></select>
+            </label>
+
+            <label>
+                Veterinário
+                <select id="consultaVeterinario" required></select>
+            </label>
+
+            <label>
+                Observação
+                <textarea id="consultaObservacao" maxlength="300" placeholder="Consulta de rotina"></textarea>
+            </label>
+
+            <button type="submit">Agendar Consulta</button>
+        </form>
+    </section>
+
+    <section class="card full">
+        <div class="titulo-linha">
+            <h2>Consultas cadastradas</h2>
+            <button class="secundario" onclick="carregarTudo()">Atualizar</button>
+        </div>
+
+        <div id="listaConsultas" class="tabela-area"></div>
+    </section>
+
+    <section class="card full">
+        <h2>Teste rápido das regras de negócio</h2>
+
+        <div class="acoes-teste">
+            <button onclick="testarConflitoAgenda()">Testar conflito de agenda</button>
+            <button onclick="testarEspecialidadeErrada()">Testar especialidade errada</button>
+        </div>
+
+        <p class="ajuda">
+            Esses botões usam os dados já cadastrados para demonstrar erros controlados vindos da camada Service.
+        </p>
+    </section>
+
+</main>
+
+<div id="toast" class="toast escondido"></div>
+
+<script src="app.js"></script>
+</body>
+</html>
